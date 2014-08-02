@@ -38,6 +38,9 @@ public class Player : MonoBehaviour {
 			AttackCheck();
 			PlayerFunction ();
 			break;
+		case Player_Status.Gliding:
+			PlayerFunction ();
+			break;
 		default:
 			PlayerFunction ();
 			break;
@@ -110,7 +113,9 @@ public class Player : MonoBehaviour {
 			break;
 		case "Hero4":
 			if(player_status != Player_Status.Gliding){
-
+				Glide();
+			}else{
+				GlidingHandle();
 			}
 			break;
 		case "Hero5":
@@ -132,8 +137,8 @@ public class Player : MonoBehaviour {
 	}
 
 	void Attack(){
-		if (attacking_time != 0)
-			return;
+//		if (attacking_time > 0)
+//			return;
 		player_status = Player_Status.Attack;
 		attacking_time  = attack_time_limit;
 	}
@@ -149,9 +154,15 @@ public class Player : MonoBehaviour {
 	}
 
 	void Glide(){
-
+		rigidbody2D.AddForce (transform.up*glideJumpForce);
+		player_status = Player_Status.Gliding;
 	}
 
+	void GlidingHandle(){
+		rigidbody2D.velocity = Vector2.zero;
+		rigidbody2D.AddForce (transform.up*glideJumpForce);
+	}
+	
 	void OnCollisionEnter2D(Collision2D coll) {
 
 		if(player_status == Player_Status.Jump || player_status == Player_Status.Jump2){

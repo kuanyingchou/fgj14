@@ -177,7 +177,7 @@ GameObject:
   - 61: {fileID: 1002489977}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -338,7 +338,7 @@ GameObject:
   - 4: {fileID: 1940522039}
   - 212: {fileID: 1940522036}
   m_Layer: 0
-  m_Name: Sky
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

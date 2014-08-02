@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
 	int jumpForce = 450;
 	string player_name;
 
-	public enum Player_Status {Moving, Jump, Dead, Pass};
+	public enum Player_Status {Moving, Jump, Jump2, Dead, Pass};
 	Player_Status player_status = Player_Status.Moving;
 
 	void Start () {
@@ -48,6 +48,9 @@ public class Player : MonoBehaviour {
 			Jump();
 			break;
 		case "Hero2":
+			if(player_status == Player_Status.Jump2)
+				break;
+			Jump();
 			break;
 		case "Hero3":
 			break;
@@ -63,12 +66,18 @@ public class Player : MonoBehaviour {
 
 	void Jump(){
 		rigidbody2D.AddForce (transform.up*jumpForce);
-		player_status = Player_Status.Jump;
+
+		if(player_status == Player_Status.Jump)
+			player_status = Player_Status.Jump2;
+		else
+			player_status = Player_Status.Jump;
 	}
+
+
 
 	void OnCollisionEnter2D(Collision2D coll) {
 
-		if(player_status == Player_Status.Jump){
+		if(player_status == Player_Status.Jump || player_status == Player_Status.Jump2){
 			if (coll.gameObject.tag == "Floor") {
 				player_status = Player_Status.Moving;	
 //				anim.SetBool("Sheep_fail", false);

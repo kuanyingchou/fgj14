@@ -172,7 +172,6 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-
 		if (coll.gameObject.tag == "Needle") {
 			player_status = Player_Status.Dead;
 		}

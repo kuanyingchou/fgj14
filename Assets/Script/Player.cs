@@ -35,6 +35,7 @@ public class Player : MonoBehaviour {
 		case Player_Status.Pass:
 			break;
 		case Player_Status.Attack:
+			AttackCheck();
 			PlayerFunction ();
 			break;
 		default:
@@ -54,11 +55,6 @@ public class Player : MonoBehaviour {
 		case "Hero3":
 			if(attack_CDtime > 0)
 				attack_CDtime -= Time.deltaTime;
-			if(attacking_time > 0){
-				attacking_time -= Time.deltaTime;
-			}else if(player_status == Player_Status.Attack){
-				player_status = Player_Status.Moving;
-			}
 			break;
 		case "Hero4":
 			break;
@@ -109,10 +105,8 @@ public class Player : MonoBehaviour {
 			Jump();
 			break;
 		case "Hero3":
-			if(player_status != Player_Status.Attack){
-				if(attack_CDtime <= 0)
-					Attack();
-			}
+			if(player_status != Player_Status.Attack && attack_CDtime <= 0)
+				Attack();
 			break;
 		case "Hero4":
 			if(player_status != Player_Status.Gliding){
@@ -138,16 +132,24 @@ public class Player : MonoBehaviour {
 	}
 
 	void Attack(){
-		if (attacking_time == 0) {
-			player_status = Player_Status.Attack;
-			attacking_time  = attack_time_limit;
-		}
-		attacking_time -= Time.deltaTime;
+		if (attacking_time != 0)
+			return;
+		player_status = Player_Status.Attack;
+		attacking_time  = attack_time_limit;
+	}
 
+	void AttackCheck(){
+		attacking_time -= Time.deltaTime;
+		
 		if (attacking_time <= 0) {
+//			attacking_time = 0;
 			player_status = Player_Status.Moving;
 			attack_CDtime = attack_CDtime_limit;
 		}
+	}
+
+	void Glide(){
+
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {

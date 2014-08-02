@@ -3,15 +3,17 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	int speed=1;
-	int jumpForce = 450;
+	bool spotted = false;
+	public int speed=1;
+	public int jumpForce = 450;
+	public int flyForce = 150;
 	float attack_time_limit = 0.2f;
 	float attack_CDtime_limit = 0.5f;
 	float attacking_time, attack_CDtime;
 	string player_name;
 	Animator anim;
 
-	public enum Player_Status {Moving, Jump, Jump2, Attack, Dead, Pass};
+	public enum Player_Status {Moving, Jump, Jump2, Attack, Fly, Dead, Pass};
 	Player_Status player_status = Player_Status.Moving;
 
 	void Start () {
@@ -21,18 +23,56 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Update () {
+		switch(player_status){
+		case Player_Status.Dead:
+			break;
+		case Player_Status.Pass:
+			break;
+		case Player_Status.Attack:
+			PlayerFunction ();
+			break;
+		default:
+			PlayerFunction ();
+			break;
+		}
+
 	}
 
 	void FixedUpdate (){
 
-		switch(player_status){
-		case Player_Status.Dead:
-			Application.LoadLevel(Application.loadedLevel);
+		switch (player_name) {
+		case "Hero1":
 			break;
-		case Player_Status.Pass:
+		case "Hero2":
+			break;
+		case "Hero3":
+			if(attack_CDtime > 0)
+				attack_CDtime -= Time.deltaTime;
+			break;
+		case "Hero4":
+			break;
+		case "Hero5":
 			break;
 		default:
-			PlayerFunction ();
+			break;
+		}
+
+
+		switch(player_status){
+		case Player_Status.Dead:
+//gooku			Application.LoadLevel(Application.loadedLevel);
+			GameManger.game_status = GameManger.Game_Status.Over;
+			break;
+		case Player_Status.Pass:
+			GameManger.game_status = GameManger.Game_Status.Pass;
+			break;
+		case Player_Status.Attack:
+//gooku			PlayerFunction ();
+			Movement ();
+			CheckAttach();
+			break;
+		default:
+//gooku			PlayerFunction ();
 			Movement ();
 			break;
 		}
@@ -60,14 +100,9 @@ public class Player : MonoBehaviour {
 			break;
 		case "Hero3":
 			if(player_status != Player_Status.Attack){
-				if(attack_CDtime > 0)
-				{
-					attack_CDtime -= Time.deltaTime;
-				}else{
+				if(attack_CDtime <= 0)
 					Attack();
-				}
 			}
-
 			break;
 		case "Hero4":
 			break;
@@ -101,6 +136,11 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	void CheckAttach(){
+
+
+	}
+
 	void OnCollisionEnter2D(Collision2D coll) {
 
 		if(player_status == Player_Status.Jump || player_status == Player_Status.Jump2){
@@ -108,7 +148,10 @@ public class Player : MonoBehaviour {
 				player_status = Player_Status.Moving;	
 //				anim.SetBool("Sheep_fail", false);
 			}
+		}else if(player_status == Player_Status.Attack){
+			coll.gameObject.SendMessage("Attacked");
 		}
+
 
 		if (coll.gameObject.tag == "Needle") {
 			player_status = Player_Status.Dead;
@@ -118,5 +161,13 @@ public class Player : MonoBehaviour {
 			player_status = Player_Status.Pass;
 		}
 	}
+/*
+	void Dead(){
 
+		if (player_status == Player_Status.Attack)
+			return;
+
+			player_status = Player_Status.Dead;
+	}
+*/
 }

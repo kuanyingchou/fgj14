@@ -1441,7 +1441,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   jumpForce: 400
-  flyForce: 150
+  glideJumpForce: 550
+  glidingForce: 150
 --- !u!212 &2032757521
 SpriteRenderer:
   m_ObjectHideFlags: 0

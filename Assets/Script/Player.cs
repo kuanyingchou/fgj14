@@ -119,6 +119,9 @@ public class Player : MonoBehaviour {
 			}
 			break;
 		case "Hero5":
+			print (Physics2D.gravity);
+			Physics2D.gravity = -Physics2D.gravity;
+			transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
 			break;
 		default:
 			break;

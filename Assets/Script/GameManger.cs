@@ -22,5 +22,6 @@ public class GameManger : MonoBehaviour {
 			break;
 		default:
 			break;
+		}	
 	}
 }

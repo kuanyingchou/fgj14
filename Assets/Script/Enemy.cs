@@ -15,6 +15,6 @@ public class Enemy : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 		if(col.gameObject.tag == "Weapon" && Player.player_status == Player.Player_Status.Attack)
-			Destroy(gameObject, 1);
+			Destroy(gameObject);
 	}
 }

@@ -4,11 +4,18 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 	public float height;
 	public float width;
+	private float xOffset;
+	private float yOffset;
 
 	public GameObject player;
 
+	public bool followX;
+	public bool followY;
+
 	// Use this for initialization
 	void Start () {
+		xOffset = transform.position.x - player.transform.position.x;
+		yOffset = transform.position.y - player.transform.position.y;
 
 		Follow();
 		CheckBoundary();
@@ -25,8 +32,8 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void DelayedFollow(float coef){
-		Vector3 dest = new Vector3(player.transform.position.x, 
-		                           player.transform.position.y, 
+		Vector3 dest = new Vector3(followX ? player.transform.position.x + xOffset : transform.position.x, 
+		                           followY ? player.transform.position.y + yOffset : transform.position.y, 
 		                           transform.position.z);
 		transform.position = (dest - transform.position) * coef + transform.position; 
 	}

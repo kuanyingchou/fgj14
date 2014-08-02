@@ -19,13 +19,17 @@ public class Player : MonoBehaviour {
 	string player_name;
 	Animator anim;
 
+	string soundPath = "Music/";
+	AudioClip audioClip;
+
 	public enum Player_Status {Moving, Jump, Jump2, Attack, Gliding, Dead, Pass};
     public static Player_Status player_status = Player_Status.Moving;
+	
 
 	void Start () {
 		player_status = Player_Status.Moving;
 		player_name = gameObject.name;
-//		anim = gameObject.GetComponent<Animator>();
+		anim = gameObject.GetComponent<Animator>();
 	}
 	
 	void Update () {
@@ -45,11 +49,12 @@ public class Player : MonoBehaviour {
 			PlayerFunction ();
 			break;
 		}
-
+		print((float)player_status);
+		anim.SetFloat("State", (float)player_status);
 	}
 
 	void FixedUpdate (){
-
+	
 		switch (player_name) {
 		case "Hero1":
 			break;
@@ -119,9 +124,7 @@ public class Player : MonoBehaviour {
 			}
 			break;
 		case "Hero5":
-			print (Physics2D.gravity);
-			Physics2D.gravity = -Physics2D.gravity;
-			transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
+			AntiGravity();
 			break;
 		default:
 			break;
@@ -132,9 +135,12 @@ public class Player : MonoBehaviour {
 		if (player_status == Player_Status.Jump) {
 			rigidbody2D.velocity = Vector2.zero;
 			player_status = Player_Status.Jump2;
+			AudioPlay("jump2");
 		}
-		else
+		else{
 			player_status = Player_Status.Jump;
+			AudioPlay("jump1");
+		}
 
 		rigidbody2D.AddForce (transform.up*jumpForce);
 	}
@@ -144,6 +150,7 @@ public class Player : MonoBehaviour {
 //			return;
 		player_status = Player_Status.Attack;
 		attacking_time  = attack_time_limit;
+		AudioPlay("attack");
 	}
 
 	void AttackCheck(){
@@ -159,11 +166,19 @@ public class Player : MonoBehaviour {
 	void Glide(){
 		rigidbody2D.AddForce (transform.up*glideJumpForce);
 		player_status = Player_Status.Gliding;
+		AudioPlay("glide1");
 	}
 
 	void GlidingHandle(){
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.AddForce (transform.up*glidingForce);
+		AudioPlay("glide2");
+	}
+
+	void AntiGravity(){
+		Physics2D.gravity = -Physics2D.gravity;
+		transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
+		AudioPlay("anti");
 	}
 	
 	void OnCollisionEnter2D(Collision2D coll) {
@@ -188,6 +203,18 @@ public class Player : MonoBehaviour {
 
 		if (coll.gameObject.tag == "Goal") {
 			player_status = Player_Status.Pass;
+		}
+	}
+
+	void AudioPlay(string audioName){
+		if(audio){
+			Resources.UnloadAsset((Object)audioClip);
+			audioClip = (AudioClip)Resources.Load(soundPath + audioName);
+			audio.clip = audioClip;
+			audio.Play();
+		}
+		else{
+			print ("Hero has no audioSource!");
 		}
 	}
 /*

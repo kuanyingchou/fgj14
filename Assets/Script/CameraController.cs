@@ -27,16 +27,44 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void CheckBoundary(){
-		if(!IsWithinBounds()){
-			MakeWithinBounds();
-		}
+		MakeWithinBounds();
 	}
 
-	bool IsWithinBounds(){
-		
+	float GetCameraWidth(){
+		return camera.orthographicSize * 2 * Screen.width / Screen.height;
+	}
+
+	float GetCameraHeight(){
+		return camera.orthographicSize * 2;
+	}
+
+	float GetLeftBound(){
+		return -width / 2 + GetCameraWidth() * 0.5f;
+	}
+
+	float GetRightBound(){
+		return width / 2 - GetCameraWidth() * 0.5f;
+	}
+
+	float GetLowerBound(){
+		return -height / 2 + GetCameraHeight() * 0.5f;
+	}
+
+	float GetUpperBound(){
+		return height / 2 - GetCameraHeight() * 0.5f;
 	}
 
 	void MakeWithinBounds(){
-	
+		Vector3 pos = transform.position;
+
+		if(transform.position.x < GetLeftBound())
+			transform.position = new Vector3(GetLeftBound(), pos.y, pos.z);
+		else if(transform.position.x > GetRightBound())
+			transform.position = new Vector3(GetRightBound(), pos.y, pos.z);
+
+		if(transform.position.y < GetLowerBound())
+			transform.position = new Vector3(pos.x, GetLowerBound(), pos.z);
+		else if(transform.position.y > GetUpperBound())
+			transform.position = new Vector3(pos.x, GetUpperBound(), pos.z);
 	}
 }

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 	Animator anim;
 
 	public enum Player_Status {Moving, Jump, Jump2, Attack, Fly, Dead, Pass};
-	Player_Status player_status = Player_Status.Moving;
+    public static Player_Status player_status = Player_Status.Moving;
 
 	void Start () {
 		player_status = Player_Status.Moving;
@@ -70,7 +70,6 @@ public class Player : MonoBehaviour {
 		case Player_Status.Attack:
 //gooku			PlayerFunction ();
 			Movement ();
-			CheckAttach();
 			break;
 		default:
 //gooku			PlayerFunction ();
@@ -118,8 +117,10 @@ public class Player : MonoBehaviour {
 	void Jump(){
 		rigidbody2D.AddForce (transform.up*jumpForce);
 
-		if(player_status == Player_Status.Jump)
+		if (player_status == Player_Status.Jump) {
+			rigidbody2D.velocity = Vector2.zero;
 			player_status = Player_Status.Jump2;
+		}
 		else
 			player_status = Player_Status.Jump;
 	}
@@ -137,11 +138,6 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void CheckAttach(){
-
-
-	}
-
 	void OnCollisionEnter2D(Collision2D coll) {
 
 		if(player_status == Player_Status.Jump || player_status == Player_Status.Jump2){
@@ -155,6 +151,10 @@ public class Player : MonoBehaviour {
 
 
 		if (coll.gameObject.tag == "Needle") {
+			player_status = Player_Status.Dead;
+		}
+
+		if (coll.gameObject.tag == "Enemy" && player_status != Player_Status.Attack) {
 			player_status = Player_Status.Dead;
 		}
 

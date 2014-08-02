@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player");//gooku
+
 		xOffset = transform.position.x - player.transform.position.x;
 		yOffset = transform.position.y - player.transform.position.y;
 

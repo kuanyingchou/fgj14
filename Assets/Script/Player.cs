@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
 	public int speed=1;
 	public int jumpForce = 450;
 	public int glideJumpForce = 550;
-	public int glidingForce = 150;
+	public int glidingForce = 10;
 
 	float attack_time_limit = 0.2f;
 	float attack_CDtime_limit = 0.5f;

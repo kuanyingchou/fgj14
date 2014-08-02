@@ -485,7 +485,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 453199126}
   - 212: {fileID: 453199127}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hero3aRightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 467822131}
   - 212: {fileID: 467822132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -934,7 +934,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1130141445}
   - 212: {fileID: 1130141444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OvenWithFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -970,7 +970,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1130141443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0399999619, y: 1.14999998, z: 0}
+  m_LocalPosition: {x: .0399999619, y: 1, z: 0}
   m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 1497613429}
@@ -1227,7 +1227,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 789b9a5df7232c046a6169fc46b60892, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 789b9a5df7232c046a6169fc46b60892, type: 2}
       propertyPath: m_Name
@@ -1242,6 +1242,18 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: b44f2228a5b33e7408268b9b338a26b0,
         type: 3}
+    - target: {fileID: 100000, guid: 789b9a5df7232c046a6169fc46b60892, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 789b9a5df7232c046a6169fc46b60892, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 789b9a5df7232c046a6169fc46b60892, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6100000, guid: 789b9a5df7232c046a6169fc46b60892, type: 2}
     - {fileID: 5000000, guid: 789b9a5df7232c046a6169fc46b60892, type: 2}
@@ -1258,7 +1270,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1497613429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1618,6 +1630,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1994100421}
   - 212: {fileID: 1994100422}
+  - 61: {fileID: 1994100423}
+  - 50: {fileID: 1994100424}
   m_Layer: 8
   m_Name: hero3LeftHand
   m_TagString: Weapon
@@ -1659,6 +1673,32 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b5e847e27af5ab047af46c090af74a11, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!61 &1994100423
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1994100420}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: .300000012, y: .899999976}
+  m_Center: {x: .129999995, y: .219999999}
+--- !u!50 &1994100424
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1994100420}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!1 &1995409865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,9 +1869,9 @@ GameObject:
   - 50: {fileID: 2122360020}
   - 61: {fileID: 2122360019}
   - 82: {fileID: 2122360018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hero3
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,20 +5,31 @@ public class Player : MonoBehaviour {
 
 	int speed=1;
 	int jumpForce = 450;
+	string player_name;
 
-	public enum Player_Status {Moving, Jump, Stop};
+	public enum Player_Status {Moving, Jump, Dead, Pass};
 	Player_Status player_status = Player_Status.Moving;
 
 	void Start () {
 		player_status = Player_Status.Moving;
+		player_name = gameObject.name;
 	}
 	
 	void Update () {
-		PlayerFunction ();
 	}
 
 	void FixedUpdate (){
-		Movement ();
+
+		switch(player_status){
+		case Player_Status.Dead:
+			break;
+		case Player_Status.Pass:
+			break;
+		default:
+			PlayerFunction ();
+			Movement ();
+			break;
+		}
 	}
 
 	void Movement(){
@@ -30,10 +41,24 @@ public class Player : MonoBehaviour {
 		if (!Input.GetKeyDown ("space"))
 			return;
 
-		if(player_status == Player_Status.Jump)
-			return;
-	
-		Jump();
+		switch (player_name) {
+		case "Hero1":
+			if(player_status == Player_Status.Jump)
+				break;
+			Jump();
+			break;
+		case "Hero2":
+			break;
+		case "Hero3":
+			break;
+		case "Hero4":
+			break;
+		case "Hero5":
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	void Jump(){
@@ -49,7 +74,14 @@ public class Player : MonoBehaviour {
 //				anim.SetBool("Sheep_fail", false);
 			}
 		}
-		
+
+		if (coll.gameObject.tag == "Needle") {
+			player_status = Player_Status.Dead;
+		}
+
+		if (coll.gameObject.tag == "Goal") {
+			player_status = Player_Status.Pass;
+		}
 	}
 
 }

@@ -160,9 +160,7 @@ public class Player : MonoBehaviour {
 
 	void GlidingHandle(){
 		rigidbody2D.velocity = Vector2.zero;
-		rigidbody2D.AddForce (transform.up*glideJumpForce);
-
-
+		rigidbody2D.AddForce (transform.up*glidingForce);
 	}
 	
 	void OnCollisionEnter2D(Collision2D coll) {

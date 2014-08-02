@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 	Animator anim;
 
 	public enum Player_Status {Moving, Jump, Jump2, Attack, Fly, Dead, Pass};
-	Player_Status player_status = Player_Status.Moving;
+	public static Player_Status player_status = Player_Status.Moving;
 
 	void Start () {
 		player_status = Player_Status.Moving;

@@ -6,16 +6,21 @@ public class Player : MonoBehaviour {
 	bool spotted = false;
 	public int speed=1;
 	public int jumpForce = 450;
-	public int flyForce = 150;
+	public int glideJumpForce = 550;
+	public int glidingForce = 150;
 
 	float attack_time_limit = 0.2f;
 	float attack_CDtime_limit = 0.5f;
 	float attacking_time, attack_CDtime;
+
+	float gliding_time_limit = 0.2f;
+	float gliding_time;
+
 	string player_name;
 	Animator anim;
 
-	public enum Player_Status {Moving, Jump, Jump2, Attack, Fly, Dead, Pass};
-	public static Player_Status player_status = Player_Status.Moving;
+	public enum Player_Status {Moving, Jump, Jump2, Attack, Gliding, Dead, Pass};
+    public static Player_Status player_status = Player_Status.Moving;
 
 	void Start () {
 		player_status = Player_Status.Moving;
@@ -30,6 +35,10 @@ public class Player : MonoBehaviour {
 		case Player_Status.Pass:
 			break;
 		case Player_Status.Attack:
+			AttackCheck();
+			PlayerFunction ();
+			break;
+		case Player_Status.Gliding:
 			PlayerFunction ();
 			break;
 		default:
@@ -70,7 +79,6 @@ public class Player : MonoBehaviour {
 		case Player_Status.Attack:
 //gooku			PlayerFunction ();
 			Movement ();
-			CheckAttach();
 			break;
 		default:
 //gooku			PlayerFunction ();
@@ -100,48 +108,61 @@ public class Player : MonoBehaviour {
 			Jump();
 			break;
 		case "Hero3":
-			if(player_status != Player_Status.Attack){
-				if(attack_CDtime <= 0)
-					Attack();
-			}
+			if(player_status != Player_Status.Attack && attack_CDtime <= 0)
+				Attack();
 			break;
 		case "Hero4":
+			if(player_status != Player_Status.Gliding){
+				Glide();
+			}else{
+				GlidingHandle();
+			}
 			break;
 		case "Hero5":
 			break;
 		default:
 			break;
 		}
-
 	}
 
 	void Jump(){
-		rigidbody2D.AddForce (transform.up*jumpForce);
-
-		if(player_status == Player_Status.Jump)
+		if (player_status == Player_Status.Jump) {
+			rigidbody2D.velocity = Vector2.zero;
 			player_status = Player_Status.Jump2;
+		}
 		else
 			player_status = Player_Status.Jump;
+
+		rigidbody2D.AddForce (transform.up*jumpForce);
 	}
 
 	void Attack(){
-		if (attacking_time == 0) {
-			player_status = Player_Status.Attack;
-			attacking_time  = attack_time_limit;
-		}
-		attacking_time -= Time.deltaTime;
+//		if (attacking_time > 0)
+//			return;
+		player_status = Player_Status.Attack;
+		attacking_time  = attack_time_limit;
+	}
 
+	void AttackCheck(){
+		attacking_time -= Time.deltaTime;
+		
 		if (attacking_time <= 0) {
+//			attacking_time = 0;
 			player_status = Player_Status.Moving;
 			attack_CDtime = attack_CDtime_limit;
 		}
 	}
 
-	void CheckAttach(){
-
-
+	void Glide(){
+		rigidbody2D.AddForce (transform.up*glideJumpForce);
+		player_status = Player_Status.Gliding;
 	}
 
+	void GlidingHandle(){
+		rigidbody2D.velocity = Vector2.zero;
+		rigidbody2D.AddForce (transform.up*glideJumpForce);
+	}
+	
 	void OnCollisionEnter2D(Collision2D coll) {
 
 		if(player_status == Player_Status.Jump || player_status == Player_Status.Jump2){
@@ -149,12 +170,13 @@ public class Player : MonoBehaviour {
 				player_status = Player_Status.Moving;	
 //				anim.SetBool("Sheep_fail", false);
 			}
-		}else if(player_status == Player_Status.Attack){
-			coll.gameObject.SendMessage("Attacked");
 		}
 
-
 		if (coll.gameObject.tag == "Needle") {
+			player_status = Player_Status.Dead;
+		}
+
+		if (coll.gameObject.tag == "Enemy" && player_status != Player_Status.Attack) {
 			player_status = Player_Status.Dead;
 		}
 

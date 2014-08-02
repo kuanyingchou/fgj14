@@ -27,6 +27,7 @@ public class Player : MonoBehaviour {
 
 		switch(player_status){
 		case Player_Status.Dead:
+			Application.LoadLevel(Application.loadedLevel);
 			break;
 		case Player_Status.Pass:
 			break;
@@ -63,7 +64,6 @@ public class Player : MonoBehaviour {
 				{
 					attack_CDtime -= Time.deltaTime;
 				}else{
-					attack_CDtime = attack_CDtime_limit;
 					Attack();
 				}
 			}
@@ -91,9 +91,14 @@ public class Player : MonoBehaviour {
 	void Attack(){
 		if (attacking_time == 0) {
 			player_status = Player_Status.Attack;
+			attacking_time  = attack_time_limit;
 		}
+		attacking_time -= Time.deltaTime;
 
-		attacking_time += Time.deltaTime;
+		if (attacking_time <= 0) {
+			player_status = Player_Status.Moving;
+			attack_CDtime = attack_CDtime_limit;
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {

@@ -6,15 +6,20 @@ public class Player : MonoBehaviour {
 	bool spotted = false;
 	public int speed=1;
 	public int jumpForce = 450;
-	public int flyForce = 150;
+	public int glideJumpForce = 550;
+	public int glidingForce = 150;
 
 	float attack_time_limit = 0.2f;
 	float attack_CDtime_limit = 0.5f;
 	float attacking_time, attack_CDtime;
+
+	float gliding_time_limit = 0.2f;
+	float gliding_time;
+
 	string player_name;
 	Animator anim;
 
-	public enum Player_Status {Moving, Jump, Jump2, Attack, Fly, Dead, Pass};
+	public enum Player_Status {Moving, Jump, Jump2, Attack, Gliding, Dead, Pass};
     public static Player_Status player_status = Player_Status.Moving;
 
 	void Start () {
@@ -49,6 +54,11 @@ public class Player : MonoBehaviour {
 		case "Hero3":
 			if(attack_CDtime > 0)
 				attack_CDtime -= Time.deltaTime;
+			if(attacking_time > 0){
+				attacking_time -= Time.deltaTime;
+			}else if(player_status == Player_Status.Attack){
+				player_status = Player_Status.Moving;
+			}
 			break;
 		case "Hero4":
 			break;
@@ -105,13 +115,15 @@ public class Player : MonoBehaviour {
 			}
 			break;
 		case "Hero4":
+			if(player_status != Player_Status.Gliding){
+
+			}
 			break;
 		case "Hero5":
 			break;
 		default:
 			break;
 		}
-
 	}
 
 	void Jump(){
@@ -145,8 +157,6 @@ public class Player : MonoBehaviour {
 				player_status = Player_Status.Moving;	
 //				anim.SetBool("Sheep_fail", false);
 			}
-		}else if(player_status == Player_Status.Attack){
-			coll.gameObject.SendMessage("Attacked");
 		}
 
 

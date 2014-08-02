@@ -161,11 +161,16 @@ public class Player : MonoBehaviour {
 	void GlidingHandle(){
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.AddForce (transform.up*glideJumpForce);
+
+
 	}
 	
 	void OnCollisionEnter2D(Collision2D coll) {
 
-		if(player_status == Player_Status.Jump || player_status == Player_Status.Jump2){
+		if(player_status == Player_Status.Jump 
+		   || player_status == Player_Status.Jump2
+		   || player_status == Player_Status.Gliding
+		   ){
 			if (coll.gameObject.tag == "Floor") {
 				player_status = Player_Status.Moving;	
 //				anim.SetBool("Sheep_fail", false);

@@ -115,14 +115,14 @@ public class Player : MonoBehaviour {
 	}
 
 	void Jump(){
-		rigidbody2D.AddForce (transform.up*jumpForce);
-
 		if (player_status == Player_Status.Jump) {
 			rigidbody2D.velocity = Vector2.zero;
 			player_status = Player_Status.Jump2;
 		}
 		else
 			player_status = Player_Status.Jump;
+
+		rigidbody2D.AddForce (transform.up*jumpForce);
 	}
 
 	void Attack(){

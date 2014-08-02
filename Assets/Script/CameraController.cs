@@ -21,9 +21,14 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void Follow(){
-		transform.position = new Vector3(player.transform.position.x, 
-		                                 player.transform.position.y, 
-		                                 transform.position.z);
+		DelayedFollow(1);
+	}
+
+	void DelayedFollow(float coef){
+		Vector3 dest = new Vector3(player.transform.position.x, 
+		                           player.transform.position.y, 
+		                           transform.position.z);
+		transform.position = (dest - transform.position) * coef + transform.position; 
 	}
 
 	void CheckBoundary(){
@@ -58,13 +63,15 @@ public class CameraController : MonoBehaviour {
 		Vector3 pos = transform.position;
 
 		if(transform.position.x < GetLeftBound())
-			transform.position = new Vector3(GetLeftBound(), pos.y, pos.z);
+			pos = new Vector3(GetLeftBound(), pos.y, pos.z);
 		else if(transform.position.x > GetRightBound())
-			transform.position = new Vector3(GetRightBound(), pos.y, pos.z);
+			pos = new Vector3(GetRightBound(), pos.y, pos.z);
 
 		if(transform.position.y < GetLowerBound())
-			transform.position = new Vector3(pos.x, GetLowerBound(), pos.z);
+			pos = new Vector3(pos.x, GetLowerBound(), pos.z);
 		else if(transform.position.y > GetUpperBound())
-			transform.position = new Vector3(pos.x, GetUpperBound(), pos.z);
+			pos = new Vector3(pos.x, GetUpperBound(), pos.z);
+
+		transform.position = pos;
 	}
 }

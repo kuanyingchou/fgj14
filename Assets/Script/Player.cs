@@ -4,13 +4,13 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 	bool spotted = false;
-	public int speed=1;
+	int speed=3;
 	public int jumpForce = 450;
 	public int glideJumpForce = 550;
 	public int glidingForce = 10;
 
 	float attack_time_limit = 0.2f;
-	float attack_CDtime_limit = 0.5f;
+	float attack_CDtime_limit = 0.2f;
 	float attacking_time, attack_CDtime;
 
 	float gliding_time_limit = 0.2f;
@@ -30,6 +30,8 @@ public class Player : MonoBehaviour {
 		player_status = Player_Status.Moving;
 		player_name = gameObject.name;
 		anim = gameObject.GetComponent<Animator>();
+
+		Physics2D.gravity = new Vector3(0, -9.8f, 0);
 	}
 	
 	void Update () {
@@ -49,7 +51,6 @@ public class Player : MonoBehaviour {
 			PlayerFunction ();
 			break;
 		}
-		//print((float)player_status);
 		anim.SetFloat("State", (float)player_status);
 	}
 
@@ -179,9 +180,7 @@ public class Player : MonoBehaviour {
 		Physics2D.gravity = -Physics2D.gravity;
 		transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
 		AudioPlay("anti");
-
-		print (Physics2D.gravity);
-		print (transform.localScale.y);
+	
 	}
 	
 	void OnCollisionEnter2D(Collision2D coll) {

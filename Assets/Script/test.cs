@@ -3,12 +3,20 @@ using System.Collections;
 
 public class test : MonoBehaviour {
 
-	// Use this for initialization
+	GameObject gm;
+
+	void Awake(){
+		gm = GameObject.FindGameObjectWithTag("GM");
+		
+		if(gm == null){
+
+			Instantiate(Resources.Load("GM"), Vector3.zero, Quaternion.identity);
+		}
+	}
+
 	void Start () {
-	
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}

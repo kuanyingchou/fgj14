@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
 			PlayerFunction ();
 			break;
 		}
-		print((float)player_status);
+		//print((float)player_status);
 		anim.SetFloat("State", (float)player_status);
 	}
 
@@ -179,6 +179,9 @@ public class Player : MonoBehaviour {
 		Physics2D.gravity = -Physics2D.gravity;
 		transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
 		AudioPlay("anti");
+
+		print (Physics2D.gravity);
+		print (transform.localScale.y);
 	}
 	
 	void OnCollisionEnter2D(Collision2D coll) {

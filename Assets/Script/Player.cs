@@ -22,9 +22,13 @@ public class Player : MonoBehaviour {
 	string soundPath = "Music/";
 	AudioClip audioClip;
 
-	public enum Player_Status {Moving, Jump, Jump2, Attack, Gliding, Gliding_Jump, Dead, Pass};
+	public enum Player_Status {Moving, Jump, Jump2, Attack, Gliding, Gliding_Jump, Over, Dead, Pass};
     public static Player_Status player_status = Player_Status.Moving;
 	
+
+	void Awake(){
+		player_status = Player_Status.Moving;
+	}
 
 	void Start () {
 		player_status = Player_Status.Moving;
@@ -37,6 +41,8 @@ public class Player : MonoBehaviour {
 	void Update () {
 		switch(player_status){
 		case Player_Status.Dead:
+			break;
+		case Player_Status.Over:
 			break;
 		case Player_Status.Pass:
 			break;
@@ -82,6 +88,10 @@ public class Player : MonoBehaviour {
 		case Player_Status.Dead:
 //gooku			Application.LoadLevel(Application.loadedLevel);
 			GameManger.game_status = GameManger.Game_Status.Over;
+			player_status = Player_Status.Over;
+			Destroy(rigidbody2D);
+			break;
+		case Player_Status.Over:
 			break;
 		case Player_Status.Pass:
 			GameManger.game_status = GameManger.Game_Status.Pass;
@@ -177,6 +187,7 @@ public class Player : MonoBehaviour {
 	void GlidingHandle(){
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.AddForce (transform.up*glidingForce);
+		player_status = Player_Status.Gliding_Jump;
 		AudioPlay("glide2");
 	}
 

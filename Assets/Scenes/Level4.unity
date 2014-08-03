@@ -561,6 +561,7 @@ GameObject:
   - 4: {fileID: 401019650}
   - 198: {fileID: 401019649}
   - 199: {fileID: 401019648}
+  - 114: {fileID: 401019651}
   m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
@@ -1664,6 +1665,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1866433643}
   m_RootOrder: 2
+--- !u!114 &401019651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 401019647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fcda9497e01134bb02ae4dfb9d809e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &416786179
 Prefab:
   m_ObjectHideFlags: 0
@@ -4038,19 +4050,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0
+      value: .112458192
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: .775083601
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.x
-      value: .131330997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.width
-      value: .737338006
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
@@ -4644,10 +4656,10 @@ Camera:
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .131330997
-    y: 0
-    width: .737338006
-    height: 1
+    x: 0
+    y: .112458192
+    width: 1
+    height: .775083601
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60

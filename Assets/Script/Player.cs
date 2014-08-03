@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	string soundPath = "Music/";
 	AudioClip audioClip;
 
-	public enum Player_Status {Moving, Jump, Jump2, Attack, Gliding, Dead, Pass};
+	public enum Player_Status {Moving, Jump, Jump2, Attack, Gliding, Gliding_Jump, Dead, Pass};
     public static Player_Status player_status = Player_Status.Moving;
 	
 
@@ -44,6 +44,10 @@ public class Player : MonoBehaviour {
 			break;
 		case Player_Status.Gliding:
 			PlayerFunction ();
+			break;
+		case Player_Status.Gliding_Jump:
+			PlayerFunction ();
+			GlidingJumpCheck();
 			break;
 		default:
 			PlayerFunction ();
@@ -173,6 +177,11 @@ public class Player : MonoBehaviour {
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.AddForce (transform.up*glidingForce);
 		AudioPlay("glide2");
+	}
+
+	void GlidingJumpCheck(){
+		if (rigidbody2D.velocity.y < 0)
+			player_status = Player_Status.Gliding;
 	}
 
 	void AntiGravity(){

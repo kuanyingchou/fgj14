@@ -61,15 +61,15 @@ BlendTree:
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 0}
-    m_Threshold: 4
+  - m_Motion: {fileID: 7400000, guid: 3d74669b64f637b4199b3b9cece02692, type: 2}
+    m_Threshold: 5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: 7b9e11ea1e3371740816c1039257a03a, type: 2}
-    m_Threshold: 5
+    m_Threshold: 6
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -78,7 +78,7 @@ BlendTree:
   m_BlendParameter: State
   m_BlendParameterY: New Float
   m_MinThreshold: 0
-  m_MaxThreshold: 5
+  m_MaxThreshold: 6
   m_UseAutomaticThresholds: 0
   m_BlendType: 0
 --- !u!1102 &110200000

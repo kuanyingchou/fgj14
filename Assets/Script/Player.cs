@@ -95,6 +95,7 @@ public class Player : MonoBehaviour {
 		case Player_Status.Over:
 			break;
 		case Player_Status.Pass:
+			Physics2D.gravity = new Vector3(0, -9.8f, 0);
 			GameManger.game_status = GameManger.Game_Status.Pass;
 			break;
 		case Player_Status.Attack:

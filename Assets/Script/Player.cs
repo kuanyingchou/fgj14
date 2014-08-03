@@ -88,6 +88,7 @@ public class Player : MonoBehaviour {
 		case Player_Status.Dead:
 //gooku			Application.LoadLevel(Application.loadedLevel);
 			GameManger.game_status = GameManger.Game_Status.Over;
+			AudioPlay("fail");
 			player_status = Player_Status.Over;
 			Destroy(rigidbody2D);
 			break;

@@ -360,11 +360,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.y
-      value: .112458192
+      value: .13443394
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.height
-      value: .775083601
+      value: .73113215
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
@@ -603,9 +603,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: .112458192
+    y: .13443394
     width: 1
-    height: .775083601
+    height: .73113215
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60

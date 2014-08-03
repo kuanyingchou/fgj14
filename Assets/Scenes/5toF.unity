@@ -1347,7 +1347,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 530181225}
   - 212: {fileID: 530181226}
-  - 114: {fileID: 530181227}
   m_Layer: 8
   m_Name: roastChickenInPlate
   m_TagString: Untagged
@@ -1389,35 +1388,6 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3696cecd85eedea4fa095f913665a870, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &530181227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 530181224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c263ac14a7938d4098eb8a3f4015485, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
-  angleOfView: 360
-  radius: 4.01000023
-  lightMaterial: {fileID: 2100000, guid: 52727931d6efd42a9b3bd240c4d66391, type: 2}
-  color: {r: 1, g: 1, b: 1, a: 1}
-  tint: {r: 1, g: .939999998, b: .589999974, a: 1}
-  alpha: .5
-  enableTint: 1
-  enableFallOff: 1
-  enablePerlin: 0
-  perlinScale: 5
-  perlinStart: 5
-  textureWidth: 128
-  textureHeight: 128
-  numberOfRays: 128
-  numberOfOverlays: 2
-  focus: 0
-  noiseIntensity: 0
 --- !u!1 &577130494
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,11 +2943,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.x
-      value: .485358715
+      value: .131330997
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
       propertyPath: m_NormalizedViewPortRect.width
-      value: .0292825755
+      value: .737338006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9b451321555ab44281f55f7b2f3069f, type: 2}
@@ -3517,6 +3487,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
+--- !u!1 &1539202806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1539202808}
+  - 114: {fileID: 1539202807}
+  m_Layer: 0
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1539202807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1539202806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c263ac14a7938d4098eb8a3f4015485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  angleOfView: 171.289993
+  radius: 21.5799999
+  lightMaterial: {fileID: 2100000, guid: 52727931d6efd42a9b3bd240c4d66391, type: 2}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  tint: {r: 1, g: .939999998, b: .589999974, a: 1}
+  alpha: 1
+  enableTint: 0
+  enableFallOff: 1
+  enablePerlin: 1
+  perlinScale: 49.2999992
+  perlinStart: 5
+  textureWidth: 128
+  textureHeight: 128
+  numberOfRays: 128
+  numberOfOverlays: 1
+  focus: 0
+  noiseIntensity: 0
+--- !u!4 &1539202808
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1539202806}
+  m_LocalRotation: {x: 0, y: 0, z: -.702836275, w: .711351752}
+  m_LocalPosition: {x: 0, y: 10.6782331, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
 --- !u!1 &1572641259
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,9 +3715,9 @@ Camera:
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .485358715
+    x: .131330997
     y: 0
-    width: .0292825755
+    width: .737338006
     height: 1
   near clip plane: .300000012
   far clip plane: 1000

@@ -13,6 +13,6 @@ public class KZChequeredTexture : MonoBehaviour {
         Texture2D t2d = texture.ToTexture2D();
         t2d.filterMode = FilterMode.Point;
         t2d.wrapMode = TextureWrapMode.Repeat;
-        renderer.material.mainTexture = t2d;
+        GetComponent<Renderer>().material.mainTexture = t2d;
     }
 }

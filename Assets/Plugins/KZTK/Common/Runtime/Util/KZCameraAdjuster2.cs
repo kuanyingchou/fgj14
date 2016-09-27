@@ -47,29 +47,29 @@ public class KZCameraAdjuster2 : MonoBehaviour {
 
     private void FlexibleHeightTopBottom(float viewportRatio) {
         if(viewportRatio > targetAspectRatio) {
-            camera.orthographicSize = 
+            GetComponent<Camera>().orthographicSize = 
                     targetSize * targetAspectRatio / 
                     viewportRatio;
         } else {
-            camera.orthographicSize = targetSize;
+            GetComponent<Camera>().orthographicSize = targetSize;
         }
-        camera.rect = targetViewportRect;
+        GetComponent<Camera>().rect = targetViewportRect;
     }
 
     private void FixedWidthFlexibleHeight(float viewportRatio) {
         if(viewportRatio < targetAspectRatio) {
-            camera.orthographicSize = 
+            GetComponent<Camera>().orthographicSize = 
                     targetSize * targetAspectRatio / 
                     viewportRatio;
             //targetSize * 2 * targetAspectRatio / viewportRatio / 2;
         } else {
             FlexibleHeightTopBottom(viewportRatio);
         }
-        camera.rect = targetViewportRect;
+        GetComponent<Camera>().rect = targetViewportRect;
     }
     private void FlexibleWidthFixedHeight() {
-        camera.orthographicSize = targetSize;
-        camera.rect = targetViewportRect;
+        GetComponent<Camera>().orthographicSize = targetSize;
+        GetComponent<Camera>().rect = targetViewportRect;
     }
 
     private float GetViewportRatio() {
@@ -81,7 +81,7 @@ public class KZCameraAdjuster2 : MonoBehaviour {
 
     public void FixedWidthFixedHeight(float viewportRatio) {
         //camera.aspect = targetAspectRatio; //will distort the view
-        camera.orthographicSize = targetSize;
+        GetComponent<Camera>().orthographicSize = targetSize;
         Rect original = targetViewportRect;
 
         //[ >>> don't know how I ended up with this, but it works!
@@ -108,10 +108,10 @@ public class KZCameraAdjuster2 : MonoBehaviour {
         }
     }
     private void SetCameraRect(float x, float y, float w, float h) {
-        camera.rect = new Rect(x, y, w, h);
+        GetComponent<Camera>().rect = new Rect(x, y, w, h);
     }
     private void SetCameraRect(Rect r) {
-        camera.rect = r;
+        GetComponent<Camera>().rect = r;
     }
 
     private void CreateBackdrop() {

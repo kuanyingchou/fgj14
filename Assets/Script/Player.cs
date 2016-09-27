@@ -90,7 +90,7 @@ public class Player : MonoBehaviour {
 			GameManger.game_status = GameManger.Game_Status.Over;
 			AudioPlay("fail");
 			player_status = Player_Status.Over;
-			Destroy(rigidbody2D);
+			Destroy(GetComponent<Rigidbody2D>());
 			break;
 		case Player_Status.Over:
 			break;
@@ -150,7 +150,7 @@ public class Player : MonoBehaviour {
 
 	void Jump(){
 		if (player_status == Player_Status.Jump) {
-			rigidbody2D.velocity = Vector2.zero;
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 			player_status = Player_Status.Jump2;
 			AudioPlay("jump2");
 		}
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour {
 			AudioPlay("jump1");
 		}
 
-		rigidbody2D.AddForce (transform.up*jumpForce);
+		GetComponent<Rigidbody2D>().AddForce (transform.up*jumpForce);
 	}
 
 	void Attack(){
@@ -181,20 +181,20 @@ public class Player : MonoBehaviour {
 	}
 
 	void Glide(){
-		rigidbody2D.AddForce (transform.up*glideJumpForce);
+		GetComponent<Rigidbody2D>().AddForce (transform.up*glideJumpForce);
 		player_status = Player_Status.Gliding;
 		AudioPlay("glide1");
 	}
 
 	void GlidingHandle(){
-		rigidbody2D.velocity = Vector2.zero;
-		rigidbody2D.AddForce (transform.up*glidingForce);
+		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		GetComponent<Rigidbody2D>().AddForce (transform.up*glidingForce);
 		player_status = Player_Status.Gliding_Jump;
 		AudioPlay("glide2");
 	}
 
 	void GlidingJumpCheck(){
-		if (rigidbody2D.velocity.y < 0)
+		if (GetComponent<Rigidbody2D>().velocity.y < 0)
 			player_status = Player_Status.Gliding;
 	}
 
@@ -231,11 +231,11 @@ public class Player : MonoBehaviour {
 	}
 
 	void AudioPlay(string audioName){
-		if(audio){
+		if(GetComponent<AudioSource>()){
 			Resources.UnloadAsset((Object)audioClip);
 			audioClip = (AudioClip)Resources.Load(soundPath + audioName);
-			audio.clip = audioClip;
-			audio.Play();
+			GetComponent<AudioSource>().clip = audioClip;
+			GetComponent<AudioSource>().Play();
 		}
 		else{
 			print ("Hero has no audioSource!");

@@ -19,6 +19,6 @@ public class Villager : MonoBehaviour {
 	}
 
 	void Jump(){
-		rigidbody2D.AddForce(new Vector2(0, Random.Range(3.0f, 6.0f)), ForceMode2D.Impulse);
+		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, Random.Range(3.0f, 6.0f)), ForceMode2D.Impulse);
 	}
 }

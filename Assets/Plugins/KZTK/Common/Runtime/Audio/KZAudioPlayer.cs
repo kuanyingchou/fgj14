@@ -41,14 +41,14 @@ public class KZAudioPlayer : MonoBehaviour {
     }
     
     public void Update() {
-        if( ! audio.isPlaying) { // was not playing
+        if( ! GetComponent<AudioSource>().isPlaying) { // was not playing
             if(isPlaying) { // gotta play now
                 if( ! timeStopped) {
                     if(elapsedTime == 0 && current == 0) { // came from stopped state
-                        audio.clip = playlist[current]; // reset clip
+                        GetComponent<AudioSource>().clip = playlist[current]; // reset clip
                         KZDebug.Log("play "+current);
                     }
-                    audio.Play();
+                    GetComponent<AudioSource>().Play();
                 }
             } else {
                 //: was not playing and does not intend to play, nothing to do
@@ -57,7 +57,7 @@ public class KZAudioPlayer : MonoBehaviour {
             if(isPlaying) { // is playing, update elapsed time
                 float deltaTime = GetDeltaTime(ignoreTimeScale);
                 if( ! ignoreTimeScale && deltaTime == 0) { // respect timescale
-                    audio.Pause();
+                    GetComponent<AudioSource>().Pause();
                     timeStopped=true;
                 }
                 elapsedTime += deltaTime;
@@ -65,18 +65,18 @@ KZDebug.Log("elapsedTime: " + elapsedTime + " / " + playlist[current].length);
                 float overflow = elapsedTime - playlist[current].length;
                 if(overflow >= 0) { 
                     elapsedTime = overflow;
-                    audio.Stop();
+                    GetComponent<AudioSource>().Stop();
 KZDebug.Log("stop playing "+current);
                     if(current < playlist.Count - 1) { // still has unplayed clips
-                        audio.clip = playlist[++current];
+                        GetComponent<AudioSource>().clip = playlist[++current];
                         //audio.time = elapsedTime;
-                        audio.Play();
+                        GetComponent<AudioSource>().Play();
 KZDebug.Log("start playing "+current);
                     } else { // has no unplayed clips
                         if(loop) { // rewind
                             current = 0;
-                            audio.clip = playlist[current];
-                            audio.Play();
+                            GetComponent<AudioSource>().clip = playlist[current];
+                            GetComponent<AudioSource>().Play();
                         } else { // done playing
                             Stop();
                         }
@@ -84,9 +84,9 @@ KZDebug.Log("start playing "+current);
                 }
             } else { // do not want to play any more
                 if(current == 0 && elapsedTime == 0) {
-                    audio.Stop();
+                    GetComponent<AudioSource>().Stop();
                 } else {
-                    audio.Pause();
+                    GetComponent<AudioSource>().Pause();
                 }
             }
         }
@@ -147,7 +147,7 @@ KZDebug.Log("start playing "+current);
     }    
 
     public void SetVolume(float v) {
-        audio.volume = v;
+        GetComponent<AudioSource>().volume = v;
     }
     
     private static float lastTime = 0;

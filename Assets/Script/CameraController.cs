@@ -45,11 +45,11 @@ public class CameraController : MonoBehaviour {
 	}
 
 	float GetCameraWidth(){
-		return camera.orthographicSize * 2 * Screen.width / Screen.height;
+		return GetComponent<Camera>().orthographicSize * 2 * Screen.width / Screen.height;
 	}
 
 	float GetCameraHeight(){
-		return camera.orthographicSize * 2;
+		return GetComponent<Camera>().orthographicSize * 2;
 	}
 
 	float GetLeftBound(){

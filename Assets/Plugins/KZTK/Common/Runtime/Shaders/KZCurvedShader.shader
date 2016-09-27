@@ -1,4 +1,7 @@
-﻿//2014.4.11  ken  initial version. modified from https://alastaira.wordpress.com/2013/10/25/animal-crossing-curved-world-shader/
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+//2014.4.11  ken  initial version. modified from https://alastaira.wordpress.com/2013/10/25/animal-crossing-curved-world-shader/
  
 Shader "KZTK/KZCurvedShader" {
     Properties {
@@ -33,7 +36,7 @@ Shader "KZTK/KZCurvedShader" {
         void vert( inout appdata_full v)
         {
             // Transform the vertex coordinates from model space into world space
-            float4 vv = mul( _Object2World, v.vertex );
+            float4 vv = mul( unity_ObjectToWorld, v.vertex );
  
             // Now adjust the coordinates to be relative to the camera position
             vv.xyz -= _RelativePos.xyz; //_WorldSpaceCameraPos.xyz;
@@ -48,7 +51,7 @@ Shader "KZTK/KZCurvedShader" {
                     0.0f );
  
             // Now apply the offset back to the vertices in model space
-            v.vertex += mul(_World2Object, vv);
+            v.vertex += mul(unity_WorldToObject, vv);
         }
  
         // This is just a default surface shader

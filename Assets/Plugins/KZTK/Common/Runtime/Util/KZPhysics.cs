@@ -13,7 +13,7 @@ public class KZPhysics : MonoBehaviour {
         float vz = (to.z - from.z) / duration;
 	
 	Vector3 force = new Vector3(vx, vy, vz);
-        target.rigidbody.AddForce(force * mass, ForceMode.Impulse);
+        target.GetComponent<Rigidbody>().AddForce(force * mass, ForceMode.Impulse);
     }
 
 }

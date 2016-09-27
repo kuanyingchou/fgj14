@@ -45,13 +45,13 @@ public class KZSceneCreate  {
 	                                       Camera cam,KZScreenPos.TYPE type = KZScreenPos.TYPE.CENTER)
 	{
 		GameObject bg = GameObject.CreatePrimitive (PrimitiveType.Plane);
-		bg.renderer.material = mat;
+		bg.GetComponent<Renderer>().material = mat;
 		bg.transform.localPosition = new Vector3(0,0,900);
 		bg.transform.eulerAngles=new Vector3 (90f,180f, 0f);
 		bg.transform.localScale = new Vector3(sizeW,1,sizeH);
 		bg.AddComponent<KZScreenPos>();
 		bg.GetComponent<KZScreenPos>().SetScreenPosType(cam,type,sizeW/2,sizeH/2);
-		bg.collider.enabled = false;
+		bg.GetComponent<Collider>().enabled = false;
 		return bg;
 	}
 	/// <summary>
@@ -73,8 +73,8 @@ public class KZSceneCreate  {
 		broad.AddComponent<KZScreenPos>();
 		broad.GetComponent<KZScreenPos>().SetScreenPosType(cam,type,sizeW/2,sizeH/2);
 		broad.transform.localPosition =pos;
-		broad.renderer.material = mat;
-		broad.collider.enabled = false;
+		broad.GetComponent<Renderer>().material = mat;
+		broad.GetComponent<Collider>().enabled = false;
 		return  broad; 
 	}
 	/// <summary>
@@ -114,8 +114,8 @@ public class KZSceneCreate  {
 		btnChild.transform.localScale =new Vector3(W,1,H);
 		btnChild.transform.eulerAngles=new Vector3 (90f,180f, 0f);
 		btnChild.transform.localPosition =new Vector3((btn.GetComponent<KZScreenPos>().x_offset*_ScaleX)/2,(btn.GetComponent<KZScreenPos>().y_offset*_ScaleY)/2,0);
-		btnChild.renderer.material = mat;
-		btnChild.collider.enabled = false;
+		btnChild.GetComponent<Renderer>().material = mat;
+		btnChild.GetComponent<Collider>().enabled = false;
 		return btn;
 	}
 }

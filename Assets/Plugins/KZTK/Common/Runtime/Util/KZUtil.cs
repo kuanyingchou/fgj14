@@ -38,7 +38,7 @@ public class KZUtil {
     public static IEnumerator Blink(
             GameObject obj, float duration, int repeat) {
         for(int i=0; i<repeat*2; i++) {
-            obj.renderer.enabled = ! obj.renderer.enabled;
+            obj.GetComponent<Renderer>().enabled = ! obj.GetComponent<Renderer>().enabled;
             yield return new WaitForSeconds(duration / (repeat*2));
         }
     }

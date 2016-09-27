@@ -15,7 +15,7 @@ public class KZAspectRatio : MonoBehaviour {
     //Since Awake() still gets called when the script is disabled, 
     //we use Start() here
     public void Start() {
-        original = camera.rect;
+        original = GetComponent<Camera>().rect;
         AddBackdrop();
         Adjust();
     }
@@ -68,9 +68,9 @@ public class KZAspectRatio : MonoBehaviour {
     }
 
     private void SetCameraRect(float x, float y, float w, float h) {
-        camera.rect = new Rect(x, y, w, h);
+        GetComponent<Camera>().rect = new Rect(x, y, w, h);
     }
     private void SetCameraRect(Rect r) {
-        camera.rect = r;
+        GetComponent<Camera>().rect = r;
     }
 }
